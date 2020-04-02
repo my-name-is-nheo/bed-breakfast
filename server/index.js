@@ -6,7 +6,7 @@ let app = express();
 const mongoose = require("mongoose");
 app.use(express.json());
 app.use(express.static(__dirname + "/../public/dist"));
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/api/rentals/:id", cors(), async (req, res) => {
   try {
     let reviews = await Review.find({ rental: req.params.id });
@@ -32,14 +32,14 @@ app.post("/api/rentals/:id", (req, res) => {
     res.json(results);
   });
 });
-//===================================== WORKS
+//===================================== WORKS!
 app.delete("/api/rentals/:id", (req, res) => {
   console.log(`this is req.params`, req.params);
   Review.findOneAndDelete({ _id: new mongoose.mongo.ObjectID(req.params.id) })
     .then(() => res.end("delete successful"))
     .catch(() => res.json("There was an error deleting a content from User"));
 });
-//=====================================
+//===================================== WORKS!
 app.put("/api/rentals/:id", (req, res) => {
   console.log(`this is req.body for put`, req.body);
   console.log(`this is req.params`, req.params);
@@ -48,7 +48,7 @@ app.put("/api/rentals/:id", (req, res) => {
     { _id: new mongoose.mongo.ObjectID(req.params.id) },
     req.body
   )
-    .then(() => res.end("updated!"))
+    .then(() => res.json("updated!"))
     .catch(() => res.json(`error  updated content from User`));
 });
 //=====================================
