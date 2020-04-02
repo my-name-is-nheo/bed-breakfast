@@ -1,7 +1,5 @@
 # ? REST Api
 
-There are 5 total different REST api calls on this express server.
-
 1. [GET](#GET)
 2. [POST](#POST)
 3. [PUT](#PUT)
@@ -14,8 +12,12 @@ There are 5 total different REST api calls on this express server.
 ## POST
 
 > '/api/apps/:id'
+> creates a new review for specific ID.
 
 ## PUT
+
+> '/api/apps/:id'
+> updates a specific review filtered by ID.
 
 ## DELETE
 
