@@ -22,15 +22,13 @@ app.get("/api/rentals/:id", cors(), async (req, res) => {
   }
 });
 //=====================================
-app.post("/api/rentals/:id", (req, res) => {
-  var options = {};
-
-  Review.create(options, (err, results) => {
-    if (err) {
-      return console.log("error creating review: ", err);
-    }
-    res.json(results);
-  });
+app.post("/api/rentals/", async (req, res) => {
+  console.log(req.body, `from post request`);
+  const review = new Review(req.body);
+  review
+    .save()
+    .then(result => res.send(result))
+    .catch(err => res.json(err));
 });
 //===================================== WORKS!
 app.delete("/api/rentals/:id", (req, res) => {

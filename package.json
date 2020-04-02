@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack --config webpack.dev.js --watch",
     "build": "webpack --config webpack.prod.js --watch",
-    "server": "node server/index.js --watch",
+    "server": "nodemon server/index.js",
     "seed": "node db/seed.js",
     "test": "jest"
   },
