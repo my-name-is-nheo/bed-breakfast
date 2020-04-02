@@ -5,9 +5,9 @@
   "main": ".eslintrc.js",
   "scripts": {
     "start": "webpack --config webpack.dev.js --watch",
-    "build": "webpack --config webpack.prod.js",
-    "server": "node server/index.js",
-    "seed": "node server/db/seed.js",
+    "build": "webpack --config webpack.prod.js --watch",
+    "server": "node server/index.js --watch",
+    "seed": "node db/seed.js",
     "test": "jest"
   },
   "repository": {

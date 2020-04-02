@@ -1,5 +1,5 @@
-const { User, Review }  = require('./index.js');
-const faker = require('faker');
+const { User, Review } = require("./index.js");
+const faker = require("faker");
 
 const users = [];
 for (let i = 1; i <= 100; i++) {
@@ -14,13 +14,13 @@ const reviews = [];
 const seedDb = function() {
   User.insertMany(users)
     .then(() => User.find())
-    .then( users => {
+    .then(users => {
       for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < 100; j++) {
           reviews.push({
-            user: users[i]._id, 
+            user: users[i]._id,
             rental: j + 1,
-            body: faker.fake('{{lorem.paragraph}}'),
+            body: faker.fake("{{lorem.paragraph}}"),
             cleanliness: Math.ceil(Math.random() * 5),
             communication: Math.ceil(Math.random() * 5),
             value: Math.ceil(Math.random() * 5),
@@ -33,7 +33,7 @@ const seedDb = function() {
       return Review.insertMany(reviews);
     })
     .then(() => {})
-    .catch((e) => console.log(e));
+    .catch(e => console.log(e));
 };
 
 seedDb();

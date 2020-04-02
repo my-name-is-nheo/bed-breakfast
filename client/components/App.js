@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import reviewApiCall from './api';
-import style from '../CSS/app.css';
-import ReviewsNav from './ReviewsNav';
-import ReviewsHeader from './ReviewsHeader';
-import Review from './Review';
-import Rating from './Rating';
+import React, { Component } from "react";
+import reviewApiCall from "./api";
+import style from "../CSS/app.css";
+import ReviewsNav from "./ReviewsNav";
+import ReviewsHeader from "./ReviewsHeader";
+import Review from "./Review";
+import Rating from "./Rating";
 
 class App extends Component {
   constructor(props) {
@@ -25,7 +25,10 @@ class App extends Component {
     };
 
     this.currentForward = () => {
-      let current = this.state.reviews.slice(this.state.currentPlace + 7, this.state.currentPlace + 14);
+      let current = this.state.reviews.slice(
+        this.state.currentPlace + 7,
+        this.state.currentPlace + 14
+      );
       this.setState({
         currentPlace: this.state.currentPlace + 7,
         currentReviews: current
@@ -33,7 +36,10 @@ class App extends Component {
     };
 
     this.currentBackword = () => {
-      let current = this.state.reviews.slice(this.state.currentPlace - 7, this.state.currentPlace);
+      let current = this.state.reviews.slice(
+        this.state.currentPlace - 7,
+        this.state.currentPlace
+      );
       this.setState({
         currentPlace: this.state.currentPlace - 7,
         currentReviews: current
@@ -42,7 +48,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let endPoint = window.location.href.split('=');
+    let endPoint = window.location.href.split("=");
     reviewApiCall(endPoint[1])
       .then(result => this.setState(result))
       .catch(e => this.setState(e));
@@ -51,27 +57,32 @@ class App extends Component {
   render() {
     return (
       <div className={style.app}>
-        <ReviewsHeader 
-          average={this.state.average}
-          total={this.state.total}
-        />
+        <ReviewsHeader average={this.state.average} total={this.state.total} />
         <div className={style.ratingHolderDiv}>
-          <Rating name={{name: 'Cleanliness'}}score={this.state.cleanliness}/>
-          <Rating name={{name: 'Communication'}}score={this.state.communication}/>
-          <Rating name={{name: 'Value'}}score={this.state.value}/>
-          <Rating name={{name: 'Accuracy'}}score={this.state.accuracy}/>
-          <Rating name={{name: 'Check-in'}}score={this.state.checkIn}/>
-          <Rating name={{name: 'Location'}}score={this.state.location}/>
+          <Rating
+            name={{ name: "Cleanliness" }}
+            score={this.state.cleanliness}
+          />
+          <Rating
+            name={{ name: "Communication" }}
+            score={this.state.communication}
+          />
+          <Rating name={{ name: "Value" }} score={this.state.value} />
+          <Rating name={{ name: "Accuracy" }} score={this.state.accuracy} />
+          <Rating name={{ name: "Check-in" }} score={this.state.checkIn} />
+          <Rating name={{ name: "Location" }} score={this.state.location} />
         </div>
-        {this.state.currentReviews.map((review, i) => <Review review={review} key={i} />)}
-        {this.state.reviews.length > 0 && 
-          <ReviewsNav 
+        {this.state.currentReviews.map((review, i) => (
+          <Review review={review} key={i} />
+        ))}
+        {this.state.reviews.length > 0 && (
+          <ReviewsNav
             currentPlace={this.state.currentPlace}
             currentForward={this.currentForward}
             currentBackword={this.currentBackword}
             reviews={this.state.reviews}
           />
-        }
+        )}
       </div>
     );
   }

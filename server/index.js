@@ -1,30 +1,57 @@
-const express = require('express');
-const path = require('path');
-const { User, Review } = require('./db/index.js');
-const cors = require('cors');
+const express = require("express");
+const path = require("path");
+const { User, Review } = require("../db/index.js");
+const cors = require("cors");
 let app = express();
+const mongoose = require("mongoose");
 app.use(express.json());
-app.use(express.static(__dirname + '/../public/dist'));
+app.use(express.static(__dirname + "/../public/dist"));
 
-app.get('/api/rentals/:id', cors(), async (req, res) => {
+app.get("/api/rentals/:id", cors(), async (req, res) => {
   try {
-    let reviews = await Review.find({ rental: req.params.id});
+    let reviews = await Review.find({ rental: req.params.id });
     let newArray = [];
     for (let i = 0; i < reviews.length; i++) {
       let user = await User.findById(reviews[i].user);
-      let copy = {...reviews[i]._doc, userProfile: user};
-      newArray.push(copy)
+      let copy = { ...reviews[i]._doc, userProfile: user };
+      newArray.push(copy);
     }
-   res.json(newArray)
+    res.json(newArray);
   } catch (e) {
     res.sendStatus(500);
   }
 });
-
-app.get('/app.js', cors(), async (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/dist/bundle.js'))
+//=====================================
+app.post("/api/rentals/", (req, res) => {
+  var newUser = new User({ name: req.body.name, imageUrl: req.body.imageUrl });
+  var newReview = new Review();
 });
+//===================================== WORKS
+app.delete("/api/rentals/:id", (req, res) => {
+  console.log(`this is req.params`, req.params);
+  Review.findOneAndDelete({ _id: new mongoose.mongo.ObjectID(req.params.id) })
+    .then(() => res.end("delete successful"))
+    .catch(() => res.json("There was an error deleting a content from User"));
+});
+//=====================================
+app.put("/api/rentals/:id", (req, res) => {
+  console.log(`this is req.body for put`, req.body);
+  console.log(`this is req.params`, req.params);
+  Review.findOneAndUpdate(
+    { _id: new mongoose.mongo.ObjectID(req.params.id) },
+    req.body
+  )
+    .then(() => res.end("updated!"))
+    .catch(() => res.json(`error  updated content from User`));
+});
+//=====================================
 
+app.get("/app.js", cors(), async (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/dist/bundle.js"));
+});
+app.get("/app.js", cors(), async (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/dist/bundle.js"));
+});
 
 let port = process.env.PORT;
 if (port == null || port == "") {
