@@ -2,7 +2,7 @@ const { User, Review } = require("./index.js");
 const faker = require("faker");
 
 const users = [];
-for (let i = 1; i <= 100; i++) {
+for (let i = 1; i <= 1000000; i++) {
   users.push({
     name: faker.name.findName(),
     imageUrl: `https://hackreactoramazonfrontendcapstone.s3-us-west-2.amazonaws.com/${i}.jpeg`
@@ -16,7 +16,7 @@ const seedDb = function() {
     .then(() => User.find())
     .then(users => {
       for (let i = 0; i < users.length; i++) {
-        for (let j = 0; j < 100; j++) {
+        for (let j = 0; j < 1000000; j++) {
           reviews.push({
             user: users[i]._id,
             rental: j + 1,

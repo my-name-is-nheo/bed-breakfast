@@ -21,7 +21,7 @@ app.get("/api/rentals/:id", cors(), async (req, res) => {
     res.sendStatus(500);
   }
 });
-//=====================================
+//=====================================WORKS!
 app.post("/api/rentals/", async (req, res) => {
   console.log(req.body, `from post request`);
   const review = new Review(req.body);
