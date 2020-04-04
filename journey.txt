@@ -6,3 +6,8 @@ Expanded display is on.
 create table airbnb.users (user_id INTEGER, name varchar(20000), imageUrl varchar(200),rentals INTEGER,body varchar(20000), date varchar(200), cleanliness INTEGER NOT NULL, communication INTEGER NOT NULL,value INTEGER NOT NULL, accuracy INTEGER,checkIn INTEGER,location INTEGER);
 
 COPY airbnb.users(user_id,name, imageUrl,rentals,body,date,cleanliness,communication,value,accuracy,checkIn,location) FROM '/Users/nheo/Desktop/Remote/SDC/nick-service/randomReviews.csv' DELIMITER ',' CSV HEADER;
+
+
+nodemon postgresDB/index.js - to run PostgreSQL
+pg – Gives NodeJs. PostgreSQL database access.
+drop index airbnb.users_id_idx
