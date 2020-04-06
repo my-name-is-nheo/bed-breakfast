@@ -34,6 +34,17 @@ app.get("/api/airbnb.users/", (req, res) => {
     }
   );
 });
+// app.post("/api/airbnb.users/", (req, res) => {});
+// app.put("/api/airbnb.users/", (req, res) => {});
+// app.delete("/api/airbnb.users/", (req, res) => {
+//   var id = req.params.id;
+//   pool.query(`delete from airbnb.users where user_id=${id}`, (err, results) => {
+//     if (err) {
+//       console.log(`error deleting id # ${id} from postgres`);
+//     }
+//     res.send(200).json(results);
+//   });
+// });
 
 app.listen(port, () => {
   console.log(`app is running on port 3001`);
