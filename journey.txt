@@ -1,3 +1,4 @@
+POSTGRES
 \x
 Expanded display is on.
 
@@ -11,3 +12,44 @@ COPY airbnb.users(user_id,name, imageUrl,rentals,body,date,cleanliness,communica
 nodemon postgresDB/index.js - to run PostgreSQL
 pg – Gives NodeJs. PostgreSQL database access.
 drop index airbnb.users_id_idx
+
+CASSANDRA
+- goal is to handle big data work loads across multiple nodes without any single point of failure.
+- each node in a cluster can accept read and write requests, regardless of where the data is actually located in the cluster.
+- when a node goes down, read/write requests can be served from other nodes
+- one or more nodes in a cluster act as replicas for a given piece of data. if it is detected that some of the nodes responded with an outofdate value, cassandra will return the most recent value to the client, then performs a read repair in the background to update the stale values.
+- uses the gossip protocol in the background to allow the nodes to communicate with each other and detect any faulty nodes in the cluster.
+COMPONENTS OF CASSANDRA
+- node - data storage
+- data center - collection of related nodes
+-cluster - components that contains one or more data centers
+CASSANDRA QUERY LANGUAGE
+- we can access Cassandra through its node using Cassandra Query Language (CQL). CQL treats the db(keyspace) as a container of tables.
+CLUSTER
+- outmost container
+- for failure handling, every node contains a replica, and in case of a failure, the replica takes charge.
+- Cassandra arranges the nodes in a cluster, in a ring format, and assigns data to them .
+
+KEYSPACE
+- outermost container for data in Cassandra
+attributes:
+- replication factor - number of machines in the cluster that will receive copies of the same data.
+- replica placement strategy - it is nothing but the strategy to place replicas in the ring.
+ - SimpleStrategy - rack-aware strategy
+ - old network topology strategy (rack-aware strategy)
+ - network topology strategy - datacentered shared strategy
+ COLUMN FAMILY
+ - container for an ordered collection of rows.
+ - each row is an ordered collection of columns.
+
+* describe keyspaces - to list all keyspaces
+* use keyspace_name
+* create keyspace airbnb with replication = {'class':'SimpleStrategy','replication_factor':1};
+* create table users (user_id int PRIMARY KEY, name text, imageUrl text, rentals int, body text, date text, cleanliness int, communication int, value int, accuracy int, checkIn int, location int);
+* describer users - to describe table users.
+* cqlsh> use system;
+  cqlsh:system> select data_center from local;
+  default: datacenter1
+*importing csv file to cassandra table
+  COPY airbnb.users(user_id,name, imageUrl,rentals,body,date,cleanliness,communication,value,accuracy,checkIn,location) FROM '/Users/nheo/Desktop/Remote/SDC/nick-service/randomReviews.csv' with header=true;
+
