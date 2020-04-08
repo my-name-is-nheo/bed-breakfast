@@ -13,6 +13,21 @@ nodemon postgresDB/index.js - to run PostgreSQL
 pg – Gives NodeJs. PostgreSQL database access.
 drop index airbnb.users_id_idx
 
+for post request
+{
+		"user_id":10000005,
+	   "name":"nick",
+	   "imageUrl": "google.com",
+	    "body": "Do you hear me?",
+	    "cleanliness": 3,
+	    "communication":4,
+	    "value": 2,
+	    "accuracy":4,
+	    "checkIn":4,
+	    "location":5
+
+}
+
 CASSANDRA
 - goal is to handle big data work loads across multiple nodes without any single point of failure.
 - each node in a cluster can accept read and write requests, regardless of where the data is actually located in the cluster.
@@ -53,3 +68,18 @@ attributes:
 *importing csv file to cassandra table
   COPY airbnb.users(user_id,name, imageUrl,rentals,body,date,cleanliness,communication,value,accuracy,checkIn,location) FROM '/Users/nheo/Desktop/Remote/SDC/nick-service/randomReviews.csv' with header=true;
 
+
+exports.postListing = async function(object, callback) {
+  try {
+    // console.log('POST: ', object)
+    const text = 'INSERT INTO listings(title, description, photos) VALUES($1, $2, $3) RETURNING *';
+    const values = Object.values(object)
+
+    const res = await pool.query(text, values)
+    // console.log(res.rows[0])
+    callback(null, res.rows[0])
+  } catch(err) {
+    console.log(err.stack)
+    callback(err.stack, null)
+  }
+}
