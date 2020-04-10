@@ -1,7 +1,9 @@
+require("newrelic");
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const Pool = require("pg").Pool;
+const cors = require("cors");
 let app = express();
 const port = 3001;
 app.use(express.json());
@@ -14,25 +16,17 @@ const pool = new Pool({
   database: "mysdc",
   port: 5432,
 });
-// pool
-//   .connect()
-//   .then(() => {
-//     console.log(`postgres on port 5432`);
-//   })
-//   .catch((e) => {
-//     `error opening postgres`;
-//   });
-app.get("/api/airbnb.users/", (req, res) => {
-  var id = req.query.id;
-  pool.query(
-    `select * from airbnb.users where user_id=${id}`,
-    (err, result) => {
-      if (err) {
-        console.log(`error from get request (postgres)`);
-      }
-      res.status(200).json(result.rows);
+
+app.get("/api/airbnb.users/", cors(), (req, res) => {
+  // var id = req.params.id;
+  // console.log(id);
+  pool.query(`select * from airbnb.users limit 100`, (err, result) => {
+    if (err) {
+      console.log(`error from get request (postgres)`);
     }
-  );
+
+    res.status(200).json(result.rows);
+  });
 });
 app.post("/api/airbnb.users/", (req, res) => {
   console.log(req.body);
@@ -68,6 +62,9 @@ app.post("/api/airbnb.users/", (req, res) => {
 //     res.send(200).json(results);
 //   });
 // });
+app.get("/app.js", cors(), async (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/dist/bundle.js"));
+});
 
 app.listen(port, () => {
   console.log(`app is running on port 3001`);

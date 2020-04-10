@@ -21,7 +21,7 @@ class App extends Component {
       value: 0,
       accuracy: 0,
       checkIn: 0,
-      location: 0
+      location: 0,
     };
 
     this.currentForward = () => {
@@ -31,7 +31,7 @@ class App extends Component {
       );
       this.setState({
         currentPlace: this.state.currentPlace + 7,
-        currentReviews: current
+        currentReviews: current,
       });
     };
 
@@ -42,16 +42,25 @@ class App extends Component {
       );
       this.setState({
         currentPlace: this.state.currentPlace - 7,
-        currentReviews: current
+        currentReviews: current,
       });
     };
   }
 
   componentDidMount() {
     let endPoint = window.location.href.split("=");
+    console.log(window.location.href);
+    console.log(endPoint);
+
     reviewApiCall(endPoint[1])
-      .then(result => this.setState(result))
-      .catch(e => this.setState(e));
+      .then((result) => {
+        console.log("reviewapi result", result);
+        this.setState(result);
+      })
+      .catch((e) => {
+        console.log(e);
+        this.setState(e);
+      });
   }
 
   render() {

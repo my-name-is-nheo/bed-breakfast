@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.static(__dirname + "/../public/dist"));
 // app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/api/rentals/:id", cors(), async (req, res) => {
+app.get("/api/rentals/:id", async (req, res) => {
   try {
     let reviews = await Review.find({ rental: req.params.id });
     let newArray = [];

@@ -83,3 +83,13 @@ exports.postListing = async function(object, callback) {
     callback(err.stack, null)
   }
 }
+
+
+
+NEW RELIC
+
+- in the root directory, npm install newrelic --save
+
+- go to cp node_modules/newrelic/newrelic.js . to place the copyright
+
+- add license key
