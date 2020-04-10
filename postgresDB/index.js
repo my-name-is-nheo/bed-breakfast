@@ -34,7 +34,30 @@ app.get("/api/airbnb.users/", (req, res) => {
     }
   );
 });
-// app.post("/api/airbnb.users/", (req, res) => {});
+app.post("/api/airbnb.users/", (req, res) => {
+  console.log(req.body);
+  var body = req.body.body;
+  var name = req.body.name;
+  var user_id = req.body.user_id;
+  var imageUrl = req.body.imageUrl;
+  var cleanliness = req.body.cleanliness;
+  var communication = req.body.communication;
+  var value = req.body.value;
+  var accuracy = req.body.accuracy;
+  var checkIn = req.body.checkIn;
+  var location = req.body.location;
+  pool.query(
+    `insert into airbnb.users(user_id,name,imageUrl, body, cleanliness,communication, value, accuracy, checkIn, location) values ('${user_id}','${name}','${imageUrl}','${body}','${cleanliness}','${communication}','${value}','${accuracy}','${checkIn}','${location}')`,
+    (err, results) => {
+      if (err) {
+        console.log(`error from post request(postgres)`, err);
+      }
+      console.log("successfully sent to database");
+      res.status(200).json(results);
+    }
+  );
+});
+
 // app.put("/api/airbnb.users/", (req, res) => {});
 // app.delete("/api/airbnb.users/", (req, res) => {
 //   var id = req.params.id;
