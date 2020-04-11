@@ -29,6 +29,7 @@
     "fs": "0.0.1-security",
     "moment": "^2.24.0",
     "mongoose": "^5.9.4",
+    "newrelic": "^6.5.0",
     "pg": "^8.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.12.0"
