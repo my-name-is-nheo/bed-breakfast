@@ -12,10 +12,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const pool = new Pool({
   user: "postgres",
-  host: "3.17.167.113",
+  host: "18.220.245.234",
   password: "myPassword",
   database: "mysdc",
   port: 5432,
+});
+
+pool.connect((err) => {
+  if (err) {
+    console.log(err, " connection of pool");
+  }
+  console.log("pool connected");
 });
 
 app.get("/api/airbnb.users/", cors(), (req, res) => {
