@@ -18,12 +18,14 @@ const pool = new Pool({
   port: 5432,
 });
 
-pool.connect((err) => {
-  if (err) {
-    console.log(err, " connection of pool");
-  }
-  console.log("pool connected");
-});
+pool
+  .connect()
+  .then(() => {
+    console.log("postgres connected at 5432");
+  })
+  .catch((e) => {
+    console.timeLog(e, "postgress connection failed");
+  });
 
 app.get("/api/airbnb.users/", cors(), (req, res) => {
   // var id = req.params.id;
