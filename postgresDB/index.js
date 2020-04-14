@@ -10,12 +10,18 @@ app.use(express.json());
 app.use(express.static(__dirname + "/../public/dist"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// const pool = new Pool({
+//   user: "nheo",
+//   host: "localhost",
+//   database: "mysdc",
+//   port: 5432,
+// });
 const pool = new Pool({
   user: "postgres",
-  host: "18.220.245.234",
+  host: "ec2-18-220-245-234.us-east-2.compute.amazonaws.com",
   password: "myPassword",
   database: "mysdc",
-  port: 5432,
+  port: "5432",
 });
 
 pool
@@ -30,11 +36,13 @@ pool
 app.get("/api/airbnb.users/", cors(), (req, res) => {
   // var id = req.params.id;
   // console.log(id);
+  console.log("hello from postman");
+  console.log(pool);
   pool.query(`select * from airbnb.users limit 100`, (err, result) => {
     if (err) {
       console.log(`error from get request (postgres)`);
     }
-
+    console.log(result);
     res.status(200).json(result.rows);
   });
 });
