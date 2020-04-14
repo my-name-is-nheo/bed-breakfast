@@ -1,9 +1,9 @@
-const reviewApiCall = rentalId => {
+const reviewApiCall = (rentalId) => {
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost:3001/api/rentals/${rentalId}`)
-      .then(response => response.json())
-      .then(reviews => {
-        console.log(reviews);
+    fetch(`http://3.17.167.113:3001/api/airbnb.users/`)
+      .then((response) => response.json())
+      .then((reviews) => {
+        console.log("reviews: ", reviews);
         let length = reviews.length;
         let cleanliness = 0;
         let communication = 0;
@@ -37,17 +37,20 @@ const reviewApiCall = rentalId => {
         resolve({
           reviews: reviews,
           currentReviews: reviews.slice(0, 7),
-          average: average,
+          average: 6,
           total: length,
           cleanliness: cleanliness,
           communication: communication,
           value: value,
           accuracy: accuracy,
-          checkIn: checkIn,
-          location: location
+          checkIn: 6,
+          location: location,
         });
       })
-      .catch(e => reject({ error: true }));
+      .catch((e) => {
+        console.log("reviewapi error:", e);
+        reject({ error: true });
+      });
   });
 };
 

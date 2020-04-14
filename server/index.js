@@ -7,7 +7,8 @@ const mongoose = require("mongoose");
 app.use(express.json());
 app.use(express.static(__dirname + "/../public/dist"));
 // app.use(bodyParser.urlencoded({ extended: true }));
-app.get("/api/rentals/:id", cors(), async (req, res) => {
+
+app.get("/api/rentals/:id", async (req, res) => {
   try {
     let reviews = await Review.find({ rental: req.params.id });
     let newArray = [];
@@ -21,14 +22,15 @@ app.get("/api/rentals/:id", cors(), async (req, res) => {
     res.sendStatus(500);
   }
 });
-//=====================================
+
+//=====================================WORKS!
 app.post("/api/rentals/", async (req, res) => {
   console.log(req.body, `from post request`);
   const review = new Review(req.body);
   review
     .save()
-    .then(result => res.send(result))
-    .catch(err => res.json(err));
+    .then((result) => res.send(result))
+    .catch((err) => res.json(err));
 });
 //===================================== WORKS!
 app.delete("/api/rentals/:id", (req, res) => {

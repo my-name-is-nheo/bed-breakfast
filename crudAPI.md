@@ -11,7 +11,7 @@
 
 ## POST
 
-> '/api/apps/:id'
+> '/api/apps/'
 > creates a new review for specific ID.
 
 ## PUT
