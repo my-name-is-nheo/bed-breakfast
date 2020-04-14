@@ -11,8 +11,9 @@ app.use(express.static(__dirname + "/../public/dist"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const pool = new Pool({
-  user: "nheo",
-  host: "localhost",
+  user: "postgres",
+  host: "3.17.167.113",
+  password: "myPassword",
   database: "mysdc",
   port: 5432,
 });

@@ -1,6 +1,6 @@
 const reviewApiCall = (rentalId) => {
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost:3001/api/airbnb.users/`)
+    fetch(`http://3.17.167.113:3001/api/airbnb.users/`)
       .then((response) => response.json())
       .then((reviews) => {
         console.log("reviews: ", reviews);
