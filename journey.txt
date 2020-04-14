@@ -93,3 +93,18 @@ NEW RELIC
 - go to cp node_modules/newrelic/newrelic.js . to place the copyright
 
 - add license key
+
+
+EC2
+
+ssh -i ~/.ssh/SDC.pem ec2-user@ec2-18-220-61-159.us-east-2.compute.amazonaws.com
+
+find file path
+ realpath randomReviews.csv
+/home/ec2-user/randomReviews.csv
+
+to enter POSTGRES
+sudo su - postgres
+ psql -U postgres
+
+ ssh -i ~/.ssh/SDC.pem ec2-user@ec2-18-220-245-234.us-east-2.compute.amazonaws.com
