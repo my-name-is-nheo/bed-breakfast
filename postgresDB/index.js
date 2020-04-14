@@ -24,7 +24,7 @@ pool
     console.log("postgres connected at 5432");
   })
   .catch((e) => {
-    console.timeLog(e, "postgress connection failed");
+    console.log(e, "postgress connection failed");
   });
 
 app.get("/api/airbnb.users/", cors(), (req, res) => {
