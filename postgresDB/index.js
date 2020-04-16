@@ -36,13 +36,11 @@ pool
 app.get("/api/airbnb.users/", cors(), (req, res) => {
   // var id = req.params.id;
   // console.log(id);
-  console.log("hello from postman");
-  console.log(pool);
+
   pool.query(`select * from airbnb.users limit 100`, (err, result) => {
     if (err) {
       console.log(`error from get request (postgres)`);
     }
-    console.log(result);
     res.status(200).json(result.rows);
   });
 });
