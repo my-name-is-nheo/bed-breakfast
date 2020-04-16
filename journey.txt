@@ -107,4 +107,9 @@ to enter POSTGRES
 sudo su - postgres
  psql -U postgres
 
- ssh -i ~/.ssh/SDC.pem ec2-user@ec2-18-220-245-234.us-east-2.compute.amazonaws.com
+
+database
+  ssh -i ~/.ssh/SDC.pem ec2-user@ec2-18-220-245-234.us-east-2.compute.amazonaws.com
+
+  service
+  ssh -i ~/.ssh/SDC.pem ec2-user@ec2-3-17-167-113.us-east-2.compute.amazonaws.com
