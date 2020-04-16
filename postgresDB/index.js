@@ -80,15 +80,9 @@ app.post("/api/airbnb.users/", (req, res) => {
 //     res.send(200).json(results);
 //   });
 // });
-app.get(
-  "/loaderio-8eba86e886e10cd8412eef0fcd4cacec.txt",
-  cors(),
-  async (req, res) => {
-    res.sendFile(
-      path.join(__dirname, "../loaderio-8eba86e886e10cd8412eef0fcd4cacec.txt")
-    );
-  }
-);
+app.get("/app.js", cors(), async (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/dist/bundle.js"));
+});
 
 app.listen(port, () => {
   console.log(`app is running on port 3001`);
